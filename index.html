@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus EPM - Connected Planning</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo-container">
+                <div class="logo-icon">
+                    <i data-lucide="layers"></i>
+                </div>
+                <h2>Nexus</h2>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item">
+                    <i data-lucide="sparkles"></i>
+                    <span>Insights (IA)</span>
+                </a>
+                <a href="#" class="nav-item active">
+                    <i data-lucide="layout-dashboard"></i>
+                    <span>Planejamento (OBZ)</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i data-lucide="trending-up"></i>
+                    <span>Forecast (Rolling)</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i data-lucide="pie-chart"></i>
+                    <span>Realizado (Close)</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i data-lucide="bar-chart-2"></i>
+                    <span>Analytics</span>
+                </a>
+            </nav>
+            <div class="user-profile">
+                <img src="https://i.pravatar.cc/150?img=11" alt="User Profile">
+                <div class="user-info">
+                    <span class="user-name">Diego Admin</span>
+                    <span class="user-role">CFO</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="topbar">
+                <div class="breadcrumbs">
+                    <span>Planejamento</span>
+                    <i data-lucide="chevron-right"></i>
+                    <span class="active-crumb">Orçamento V1 - 2026</span>
+                </div>
+                <div class="topbar-actions">
+                    <button class="btn btn-secondary">
+                        <i data-lucide="share-2"></i> Compartilhar
+                    </button>
+                    <button class="btn btn-primary" id="ai-copilot-btn">
+                        <i data-lucide="bot"></i> Copilot AI
+                    </button>
+                </div>
+            </header>
+
+            <div class="infinite-canvas">
+                <!-- KPI Row -->
+                <div class="kpi-grid">
+                    <div class="glass-card kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-title">Receita Bruta (YTD)</span>
+                            <span class="kpi-trend positive"><i data-lucide="arrow-up-right"></i> 12.4%</span>
+                        </div>
+                        <div class="kpi-value">R$ 45.2M</div>
+                        <div class="kpi-subtitle">vs Budget: R$ 42.0M</div>
+                    </div>
+                    <div class="glass-card kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-title">EBITDA Margin</span>
+                            <span class="kpi-trend positive"><i data-lucide="arrow-up-right"></i> 2.1%</span>
+                        </div>
+                        <div class="kpi-value">28.5%</div>
+                        <div class="kpi-subtitle">vs Target: 26.4%</div>
+                    </div>
+                    <div class="glass-card kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-title">Despesas Operacionais</span>
+                            <span class="kpi-trend negative"><i data-lucide="arrow-down-right"></i> 5.2%</span>
+                        </div>
+                        <div class="kpi-value">R$ 12.4M</div>
+                        <div class="kpi-subtitle">vs Budget: R$ 11.8M</div>
+                    </div>
+                </div>
+
+                <!-- Main Data Grid Card -->
+                <div class="glass-card data-card expanded" id="planning-grid-card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h3>Planejamento - Despesas por Centro de Custo</h3>
+                            <p>Visualização multidimensional com edição inline.</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn-icon"><i data-lucide="filter"></i></button>
+                            <button class="btn-icon"><i data-lucide="download"></i></button>
+                            <button class="btn-icon" id="expand-grid"><i data-lucide="maximize-2"></i></button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="smart-grid-container">
+                            <table class="smart-grid">
+                                <thead>
+                                    <tr>
+                                        <th>Conta Contábil</th>
+                                        <th>Centro de Custo</th>
+                                        <th>Jan 2026</th>
+                                        <th>Fev 2026</th>
+                                        <th>Mar 2026</th>
+                                        <th>Total Q1</th>
+                                        <th>Justificativa (OBZ)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="grid-row" onclick="toggleRow(this)">
+                                        <td class="hierarchy-cell">
+                                            <i data-lucide="chevron-right" class="toggle-icon"></i>
+                                            <strong>Despesas com Pessoal</strong>
+                                        </td>
+                                        <td>Múltiplos</td>
+                                        <td class="num">R$ 150.000</td>
+                                        <td class="num">R$ 150.000</td>
+                                        <td class="num">R$ 150.000</td>
+                                        <td class="num total">R$ 450.000</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr class="grid-row child-row hidden">
+                                        <td class="hierarchy-cell pad-left">Salários e Encargos</td>
+                                        <td>Engenharia (101)</td>
+                                        <td class="editable num" contenteditable="true">100000</td>
+                                        <td class="editable num" contenteditable="true">100000</td>
+                                        <td class="editable num" contenteditable="true">100000</td>
+                                        <td class="num total">300000</td>
+                                        <td class="editable" contenteditable="true">Contratação de 2 Devs Seniores</td>
+                                    </tr>
+                                    <tr class="grid-row child-row hidden">
+                                        <td class="hierarchy-cell pad-left">Benefícios</td>
+                                        <td>Engenharia (101)</td>
+                                        <td class="editable num" contenteditable="true">50000</td>
+                                        <td class="editable num" contenteditable="true">50000</td>
+                                        <td class="editable num" contenteditable="true">50000</td>
+                                        <td class="num total">150000</td>
+                                        <td class="editable" contenteditable="true">Reajuste plano de saúde</td>
+                                    </tr>
+                                    <tr class="grid-row" onclick="toggleRow(this)">
+                                        <td class="hierarchy-cell">
+                                            <i data-lucide="chevron-right" class="toggle-icon"></i>
+                                            <strong>Despesas de Marketing</strong>
+                                        </td>
+                                        <td>Marketing (201)</td>
+                                        <td class="num">R$ 80.000</td>
+                                        <td class="num">R$ 90.000</td>
+                                        <td class="num">R$ 85.000</td>
+                                        <td class="num total">R$ 255.000</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr class="grid-row child-row hidden">
+                                        <td class="hierarchy-cell pad-left">Anúncios Pagos (Ads)</td>
+                                        <td>Marketing (201)</td>
+                                        <td class="editable num" contenteditable="true">60000</td>
+                                        <td class="editable num" contenteditable="true">70000</td>
+                                        <td class="editable num" contenteditable="true">65000</td>
+                                        <td class="num total">195000</td>
+                                        <td class="editable" contenteditable="true">Campanha Q1 Lançamento</td>
+                                    </tr>
+                                    <tr class="grid-row child-row hidden">
+                                        <td class="hierarchy-cell pad-left">Eventos e Patrocínios</td>
+                                        <td>Marketing (201)</td>
+                                        <td class="editable num" contenteditable="true">20000</td>
+                                        <td class="editable num" contenteditable="true">20000</td>
+                                        <td class="editable num" contenteditable="true">20000</td>
+                                        <td class="num total">60000</td>
+                                        <td class="editable" contenteditable="true">Sponsorship Web Summit</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- AI Copilot Panel (Hidden by default) -->
+        <aside class="copilot-panel" id="copilot-panel">
+            <div class="copilot-header">
+                <h3><i data-lucide="bot"></i> AI Planning Assistant</h3>
+                <button class="btn-icon" id="close-copilot"><i data-lucide="x"></i></button>
+            </div>
+            <div class="copilot-body" id="chat-body">
+                <div class="chat-message ai-message">
+                    <p>Olá, CFO. Eu monitorei as tendências e notei que os custos com infraestrutura na nuvem podem exceder o orçamento em 15% no Q2. Gostaria de ver uma simulação ajustando essa linha de despesa?</p>
+                </div>
+                <div class="chat-message user-message">
+                    <p>Qual o impacto no meu EBITDA se a inflação subir 2% no próximo trimestre?</p>
+                </div>
+                <div class="chat-message ai-message">
+                    <p>Considerando uma inflação de 2% maior no Q2, haverá um impacto estimado de <strong>-1.2% na Margem EBITDA</strong> (aprox. R$ 540.000). A principal linha afetada será "Despesas com Pessoal" (Acordos Sindicais). <br><br><button class="btn btn-sm btn-outline">Aplicar Simulação ao Forecast</button></p>
+                </div>
+            </div>
+            <div class="copilot-input">
+                <input type="text" placeholder="Pergunte sobre seus dados...">
+                <button class="btn-icon text-neon"><i data-lucide="send"></i></button>
+            </div>
+        </aside>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
